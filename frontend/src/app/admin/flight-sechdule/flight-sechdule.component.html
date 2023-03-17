@@ -1,0 +1,26 @@
+<div class="example-loading-shade" *ngIf="sechduleSucess">
+    <mat-spinner *ngIf="sechduleSucess"></mat-spinner>
+</div>
+<div class="maincontainer">
+    <div class="fieldcontainer">
+    <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>FlightId</mat-label>
+        <input matInput type="text" [(ngModel)]="FlightId">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [ngxMatDatetimePicker]="picker" placeholder="start date & time" [(ngModel)]="startTime">
+        
+        <mat-datepicker-toggle matSuffix [for]="$any(picker)"></mat-datepicker-toggle>
+    
+        <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [ngxMatDatetimePicker]="picker1" placeholder="end date & time" [(ngModel)]="endTime">
+        
+        <mat-datepicker-toggle matSuffix [for]="$any(picker1)"></mat-datepicker-toggle>
+    
+        <ngx-mat-datetime-picker #picker1></ngx-mat-datetime-picker>
+    </mat-form-field>
+    <button mat-stroked-button class="example-form-field" (click)="sechduleFlight()">Ok</button>
+    </div>
+</div>

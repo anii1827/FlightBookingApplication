@@ -1,0 +1,36 @@
+.example-container {
+    position: fixed;
+    top: 45px;
+    bottom:32px;
+    left: 0;
+    right: 0;
+  }
+  
+  .example-sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    background: rgba(119, 165, 233, 0.5);
+  }
+  
+  a:link{
+      font-size: 70%;
+      text-decoration: none;
+  }
+
+  a:hover{
+      color: green;
+  }
+
+  .mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+ 
+
+  

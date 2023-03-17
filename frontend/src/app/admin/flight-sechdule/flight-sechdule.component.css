@@ -1,0 +1,31 @@
+.maincontainer{
+    padding:30px;
+    text-align: center;
+}
+
+.fieldcontainer{
+    border: solid;
+    border-color: skyblue;
+    margin-top:50px;
+    margin-left: 30%;
+    display: grid;
+    width:400px;
+    padding: 30px;
+}
+
+.mat-stroked-button:hover{
+    background-color: skyblue;
+}
+
+.example-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

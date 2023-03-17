@@ -1,0 +1,41 @@
+<div class="example-loading-shade" *ngIf="historySuccees">
+    <mat-spinner *ngIf="historySuccees"></mat-spinner>
+</div>
+<div class="field">
+    <div class="titletext"><span>Flight History</span></div>
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>PhoneNumber</mat-label>
+        <input matInput type="numberl" [(ngModel)]="phoneNumber" required>
+        <button *ngIf="phoneNumber" matSuffix mat-icon-button aria-label="Clear" (click)="phoneNumber=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    <button mat-stroked-button (click)="find()">Ok</button>
+</div>
+
+
+<div class="bookingcontainer" *ngIf="dataSource">
+    <div *ngFor="let ticket of dataSource">
+             <div class="passangercontainer">
+                <div class="passangerdetails">   
+                    <div class="passangerfield">PNR : {{ticket['pnr']}}</div>
+                </div>
+                <div class="passangerdetails">   
+                    <div class="passangerfield">BookingDate. : {{ticket['bookingDate']}}</div>
+                    <div class="passangerfield">BookingId. : {{ticket['bookingId']}}</div>
+                </div>
+                <div class="passangerdetails">
+                    <div class="passangerfield">Source : {{ticket['source']}}</div>
+                    <div class="passangerfield">Destination. : {{ticket['destination']}}</div>
+                </div>
+                <div class="passangerdetails">
+                    <div class="passangerfield">Departure Date : {{ticket['startDate']}}</div>
+                    <div class="passangerfield">Departure Time : {{ticket['startTime']}}</div>
+                </div>
+                <div class="passangerdetails">
+                    <div class="passangerfield">Boarding Time : {{ticket['boardingTime']}}</div>
+                    <div class="passangerfield">No. of Passanger : {{ticket['passanger'].length}}</div>
+                </div>
+             </div>
+    </div>
+</div>

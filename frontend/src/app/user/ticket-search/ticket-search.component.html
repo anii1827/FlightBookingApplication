@@ -1,0 +1,47 @@
+<div class="example-loading-shade" *ngIf="searchsuccess">
+  <mat-spinner *ngIf="searchsuccess"></mat-spinner>
+</div>
+
+<div class="field">
+  <div class="titletext"><span>Flight History</span></div>
+    <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>PNR</mat-label>
+        <input matInput type="text" [(ngModel)]="PNR" required>
+        <button *ngIf="PNR" matSuffix mat-icon-button aria-label="Clear" (click)="PNR=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>PhoneNumber</mat-label>
+        <input matInput type="text" [(ngModel)]="phoneNumber" required>
+        <button *ngIf="PNR" matSuffix mat-icon-button aria-label="Clear" (click)="phoneNumber=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    <button mat-stroked-button (click)="find()">Ok</button>
+</div>
+
+<div class="bookingcontainer" *ngIf="dataSource">
+           <div *ngFor="let passanger of dataSource.passanger">
+                    <div class="passangercontainer">
+                            <div class="passangerdetails">
+                                <div class="passangerfield">BookingDate. : {{dataSource['bookingDate']}}</div>
+                                <div class="passangerfield">BookingId. : {{dataSource['bookingId']}}</div>
+                                <div class="passangerfield">Source : {{dataSource['source']}}</div>
+                                <div class="passangerfield">Destination. : {{dataSource['destination']}}</div>
+                            </div>
+                            <div class="passangerdetails">
+                                <div class="passangerfield">PNR No. : {{dataSource['pnr']}}</div>
+                                <div class="passangerfield">Departure Date : {{dataSource['startDate']}}</div>
+                                <div class="passangerfield">Departure Time : {{dataSource['startTime']}}</div>
+                                <div class="passangerfield">Boarding Time : {{dataSource['boardingTime']}}</div>
+                             </div>
+                            <div class="passangerdetails">
+                               <div class="passangerfield">Passanger : {{passanger['firstname']}} {{passanger['lastName']}}</div>
+                               <div class="passangerfield">DOB. : {{passanger['dateOfBirth']}}</div>
+                               <div class="passangerfield">SeatNo. : {{passanger['seatNumber']}}</div>
+                               <div class="passangerfield">SeatType. : {{passanger['seatType']}}</div>
+                            </div>
+                    </div>
+           </div>
+</div>

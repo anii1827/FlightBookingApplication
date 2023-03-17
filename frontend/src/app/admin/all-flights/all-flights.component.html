@@ -1,0 +1,39 @@
+<div class="maincontainer">
+<div class="rowcontainer" *ngFor="let flight of datasource">
+<mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+         <div class="titlecontainer">
+            <div class="title">Id : {{flight['inventory_Id']}}</div>
+            <div class="title1">AirLine : {{flight['airLine']}}</div>
+            <div class="title1">Flight-Number : {{flight['flightNo']}}</div>
+            <div class="title1">RegisterDate : {{flight['registerDate']}}</div>
+         </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="descriptioncontainer">
+            <div class="placecontainer">
+                <div class="description">Source : {{flight['source']}}</div>
+                <div class="description">Destination : {{flight['destination']}}</div>
+            </div>
+            <div class="seatcontainer">
+                <div class="description">Seat-NonBusiness : {{flight['totalSeatInNonBusinessClass']}}</div>
+                <div class="description">Seat-Business : {{flight['totalSeatInBusinessClass']}}</div>
+            </div>
+            <div class="pricecontainer">
+                <div class="description">Price-NonBusiness : {{flight['ticketPriceForNonBusinessClass']}} INR</div>
+                <div class="description">Price-Busines : {{flight['ticketPriceForBusinessClass']}} INR</div>
+            </div>
+            <div class="buttoncontainer">
+              <div class="button"><button mat-stroked-button [disabled]=flight.sechduled (click)="sechduleflight(flight.inventory_Id)">Sechdule</button></div>
+                <div class="button"><button mat-stroked-button (click)="blockFlight(flight.inventory_Id)" [disabled]=!flight.sechduled>Block</button></div>
+            </div>
+            <div class="buttoncontainer2">
+              
+            </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+</div>

@@ -1,0 +1,38 @@
+.example-form-field {
+    width: 350px;
+  }
+
+.field{
+    border: solid;
+    border-color: skyblue;
+    display: grid;
+    width: fit-content;
+    margin-top: 20px;
+    margin-left: 30%;
+    padding:30px;
+}
+
+.titletext{
+    margin-left: 25%;
+    margin-bottom: 20px;
+    font-size: x-large;
+    font-weight: bolder;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.mat-stroked-button:hover{
+    background-color: skyblue;
+}
+
+.example-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

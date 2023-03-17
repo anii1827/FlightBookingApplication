@@ -1,0 +1,90 @@
+<div class="example-loading-shade" *ngIf="bookingSuccess">
+    <mat-spinner *ngIf="bookingSuccess"></mat-spinner>
+</div>
+<mat-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="userGroup">
+      <form [formGroup]="userGroup">
+        <ng-template matStepLabel>UserDetails</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Last name, First name" formControlName="Name" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="Email" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>PhoneNumber</mat-label>
+          <input matInput placeholder="PhoneNumber" formControlName="PhoneNumber" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Total Passanger</mat-label>
+          <input matInput placeholder="totalPassanger" name="totalPassanger" type="number" [formControl]="selectedValue" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext (click)="working()">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="passanger" label="PassangerDetails" [optional]=false>
+        <form [formGroup]="passanger">
+          <div formArrayName="pass">
+              <div *ngFor="let i of getpassangerArray().controls; let j=index">
+                <div [formGroupName]="j">
+                <mat-form-field appearance="fill" >
+                  <mat-label>First Name</mat-label>
+                  <input matInput formControlName="PassangerFName" placeholder="FirstName"
+                         required>
+                </mat-form-field>
+                <mat-form-field appearance="fill" >
+                  <mat-label>Last Name</mat-label>
+                  <input matInput formControlName="PassangerLName" placeholder="LastName"
+                         required>
+                </mat-form-field>
+                <mat-form-field appearance="fill" >
+                  <mat-label>DateOfBirth</mat-label>
+                  <input matInput formControlName="PassangerDOB" placeholder="yyyy-mm-dd"
+                         required>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                  <mat-label>SeatType</mat-label>
+                  <mat-select formControlName="PassangerSeatType">
+                    <mat-option value="NonBusiness">NonBusiness</mat-option>
+                    <mat-option value="Business">Business</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="fill" >
+                  <mat-label>SeatNumber</mat-label>
+                  <mat-select formControlName="PassangerSeatNumber">
+                    <mat-option *ngFor="let x of i.get('PassangerSeatOption')?.value" value={{x}}>{{x}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+                <br>
+            </div>
+                 
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext (click)="check()">Next</button>
+            </div>
+          
+        </div>
+        </form>
+     
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Payment</ng-template>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <div class="paymentContainter">
+          <h1 class="paymentText">Total Amount : {{totalPayment}}</h1>
+          <button class="payButton" mat-stroked-button (click)="booktheTicket()">Pay</button>
+        </div>
+        <!-- <div style="width: 100%; text-align: center; margin-top: 30px;">
+        <span style="font-family: 'Times New Roman', Times, serif; font-size: xx-large;" *ngIf="bookingSucessMessage">{{bookingSucessMessage}}</span>
+      </div> -->
+      </div>
+    </mat-step>
+  </mat-stepper>
+

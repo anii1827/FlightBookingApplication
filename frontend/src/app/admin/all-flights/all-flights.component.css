@@ -1,0 +1,48 @@
+.maincontainer{
+    width: 90%;
+    margin-left: 50px;
+    margin-top: 30px;
+    border: solid;
+    border-color: skyblue;
+}
+
+.titlecontainer{
+    display: flex;
+    font-weight: lighter;
+    font-size:medium;
+    font-family: 'Times New Roman', Times, serif;
+}
+.title{
+    margin-left: 20px;
+}
+.title1{
+    margin-left: 100px;
+    
+}
+
+.descriptioncontainer{
+    display: flex;
+    font-weight: lighter;
+    font-size: medium;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.seatcontainer, .pricecontainer, .buttoncontainer{
+    margin-left: 100px;
+}
+
+.description{
+    margin: 20px;
+}
+.mat-stroked-button{
+    width: 100px;
+    margin-top: 10px;
+}
+
+.buttoncontainer2{
+    margin-left: 40px;
+    margin: 20px;
+}
+
+
+

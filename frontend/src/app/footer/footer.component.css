@@ -1,0 +1,24 @@
+.example-footer {
+    height: fit-content;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 100%;
+  }
+  a{
+    color: whitesmoke;
+  }
+  a:link{
+      text-decoration:none;
+}
+  
+
+a:hover{
+    color: green;
+}
+
+.footer-content{
+    width: 100%;
+    text-align: right;
+}

@@ -1,0 +1,48 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+  .paymentContainter{
+    border: skyblue;
+    margin-top: 30px;
+    margin-left: 5px;
+    border-style: solid;
+    width: 100%;
+    text-align: center;
+  }
+
+ .mat-button:hover, .mat-stroked-button:hover{
+   background-color: skyblue;
+ }
+
+  .paymentText{
+    font-weight: bolder;
+    padding: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .payButton{
+    width: 30px; 
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  .example-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  

@@ -1,0 +1,22 @@
+.maincontainer{
+    width: 85%;
+    padding: 20px;
+    
+}
+.subcontainer{
+    text-align: center;
+    width: fit-content;
+    display: grid;
+    margin-left: 23%;
+}
+
+.textfield{
+    padding: 20px;
+    font-size: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.imagecontainer{
+    width: 114%;
+    height:510px;
+}

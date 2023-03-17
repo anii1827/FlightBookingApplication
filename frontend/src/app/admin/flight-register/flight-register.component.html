@@ -1,0 +1,100 @@
+<div class="example-loading-shade" *ngIf="successregister">
+  <mat-spinner *ngIf="successregister"></mat-spinner>
+</div>
+<div class="maincontainer" [formGroup]="flighDetails">
+    <div class="flightdetailscontainer">
+        <mat-accordion>
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  FlightDetails
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-form-field class="inputfield" appearance="fill">
+                <mat-label>Airline</mat-label>
+                <input matInput formControlName="Airline">
+              </mat-form-field>
+              <mat-form-field class="inputfield" appearance="fill">
+                <mat-label>Flight No.</mat-label>
+                <input matInput formControlName="FlightNo">
+              </mat-form-field>
+            </mat-expansion-panel>
+          </mat-accordion>   
+    </div>
+    <div class="placecontainer">
+        <mat-accordion>
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Place
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-form-field class="inputfield" appearance="fill">
+                <mat-label>Source</mat-label>
+                <input matInput formControlName="Source" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let state of sourceStates | async" [value]="state.shortName">
+                    <span>{{state.name}}</span> |
+                    <small> {{state.shortName}}</small>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <mat-form-field class="inputfield" appearance="fill">
+                <mat-label>Destination</mat-label>
+                <input matInput formControlName="Destination" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let state of destinationStates | async" [value]="state.shortName">
+                    <span>{{state.name}}</span> |
+                    <small> {{state.shortName}}</small>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </mat-expansion-panel>
+          </mat-accordion>   
+    </div>
+    <div class="seatcontainer">
+        <mat-accordion>
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  SeatDetails
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-form-field class="inputfield" appearance="fill" >
+                <mat-label>Business</mat-label>
+                <input matInput formControlName="BusinessSeat">
+              </mat-form-field>
+              <mat-form-field class="inputfield" appearance="fill" >
+                <mat-label>NonBusiness</mat-label>
+                <input matInput formControlName="NonBusinessSeat">
+              </mat-form-field>
+            </mat-expansion-panel>
+          </mat-accordion>   
+    </div>
+    <div class="pricecontainer">
+        <mat-accordion>
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Prices
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-form-field class="inputfield" appearance="fill" >
+                <mat-label>Business</mat-label>
+                <input matInput formControlName="BusinessPrice">
+              </mat-form-field>
+              <mat-form-field class="inputfield" appearance="fill" >
+                <mat-label>NonBusiness</mat-label>
+                <input matInput formControlName="NonBusinessprice">
+              </mat-form-field>
+            </mat-expansion-panel>
+          </mat-accordion>   
+    </div>
+    <div class="registercontainer">
+        <button mat-stroked-button (click)="registerFlight()">Register</button>
+    </div>
+</div>
+
+
+
+

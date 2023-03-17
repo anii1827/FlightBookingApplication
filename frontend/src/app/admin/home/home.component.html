@@ -1,0 +1,37 @@
+<ng-container>
+    <app-admin-header></app-admin-header>
+      <mat-sidenav-container class="example-container">
+       <router-outlet></router-outlet>
+        <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
+          <mat-toolbar style="background: rgba(119, 165, 233, 0.5)">
+            <mat-toolbar-row>
+              <span><a routerLink="/admin/flights">Flights</a></span>
+              <span class="example-spacer"></span>
+            </mat-toolbar-row>
+
+            <mat-toolbar-row>
+              <span><a routerLink="/admin/register">Flight Register</a></span>
+              <span class="example-spacer"></span>
+            </mat-toolbar-row>
+          
+            <mat-toolbar-row>
+              <span><a routerLink="/admin/block">Flight Block</a></span>
+              <span class="example-spacer"></span>
+            </mat-toolbar-row>
+
+            <mat-toolbar-row>
+              <span><a routerLink="/admin/sechdule">Flight Sechduling</a></span>
+              <span class="example-spacer"></span>
+            </mat-toolbar-row>
+          
+          </mat-toolbar>
+      </mat-sidenav>
+    </mat-sidenav-container>
+    <app-footer></app-footer>
+  </ng-container>
+
+  
+ 
+  
+  
+

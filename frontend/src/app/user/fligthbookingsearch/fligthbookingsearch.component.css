@@ -1,0 +1,104 @@
+.example-form {
+    width: 100%;
+    display: flex;
+    margin: 20px;
+    
+  }
+  
+   .source  {
+    width: 30%;
+    margin: 20px;
+  } 
+
+  .destination  {
+    width: 30%;
+    margin: 20px;
+  } 
+
+  .search  {
+    width: 10%;
+    margin-top: 20px;
+    margin-left: -150px;
+    
+  } 
+ 
+  .searchIcon:hover{
+      background-color: green;
+  }
+
+ 
+
+
+  table {
+    width: 100%;
+  }
+  
+  tr.example-detail-row {
+    height: 0;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+  }
+  
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+  
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .example-element-diagram {
+    display: flex;
+    width: 100%;
+    border: 2px solid skyblue;
+    margin-top: 50px;
+    font-weight: bolder;
+    margin: 8px ;
+    height: 80px;
+    font-size: 15px;
+  }
+  
+.example-element-position{
+  margin-top: 30px;  
+  margin-left: 50px;
+  height: fit-content;
+}
+
+.expand-table{
+    float: right;
+
+}
+
+.book-button:hover{
+  background-color: skyblue; 
+}
+  
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background-color: skyblue;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+::ng-deep .mat-spinner-bar {
+  background-color: skyblue;
+}
+ 
+  
+
+
+ 

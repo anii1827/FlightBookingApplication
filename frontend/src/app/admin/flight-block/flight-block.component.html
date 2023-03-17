@@ -1,0 +1,12 @@
+<div class="example-loading-shade" *ngIf="blockSuccess">
+  <mat-spinner *ngIf="blockSuccess"></mat-spinner>
+</div>
+<div class="maincontainer">
+    <div class="fieldcontainer">
+    <mat-form-field class="example-form-field" appearance="fill">
+        <mat-label>FlightId</mat-label>
+        <input matInput type="text" [(ngModel)]="FlightId">
+      </mat-form-field>
+    <button mat-stroked-button class="example-form-field" (click)="blockFlight()">Ok</button>
+    </div>
+</div>

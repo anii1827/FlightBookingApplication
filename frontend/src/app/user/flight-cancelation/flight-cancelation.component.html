@@ -1,0 +1,22 @@
+<div class="example-loading-shade" *ngIf="cancelSuccess">
+  <mat-spinner *ngIf="cancelSuccess"></mat-spinner>
+</div>
+<div class="field">
+<div class="titletext"><span>Flight Cancel</span></div>
+<mat-form-field class="example-form-field" appearance="fill">
+    <mat-label>PNR</mat-label>
+    <input matInput type="text" [(ngModel)]="PNR" required>
+    <button *ngIf="PNR" matSuffix mat-icon-button aria-label="Clear" (click)="PNR=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field class="example-form-field" appearance="fill">
+  <mat-label>PhoneNumber</mat-label>
+  <input matInput type="text" [(ngModel)]="PhoneNumber" required>
+  <button *ngIf="PhoneNumber" matSuffix mat-icon-button aria-label="Clear" (click)="PhoneNumber=''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>   
+<button mat-stroked-button (click)="cancelFlight()">Ok</button>
+</div>

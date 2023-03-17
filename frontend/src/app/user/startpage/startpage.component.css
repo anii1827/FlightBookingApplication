@@ -1,0 +1,26 @@
+.maincontainer{
+    width: 85%;
+    padding: 20px;
+    /* margin-left: 80px; */
+    /* border: solid;
+    border-radius: 20px;
+    border-color: skyblue; */
+    
+}
+.subcontainer{
+    text-align: center;
+    width: fit-content;
+    display: grid;
+    margin-left: 23%;
+}
+
+.textfield{
+    padding: 20px;
+    font-size: 40px;
+    font-family: 'Times New Roman', Times, serif;
+}
+ 
+.imagecontainer{
+    width: 114%;
+    height:510px;
+}

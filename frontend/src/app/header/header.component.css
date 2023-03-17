@@ -1,0 +1,35 @@
+.example-header {
+    height: 6%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .header-content{
+    width: 100%;
+    width: 100%;
+    font-size: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mat-icon{
+  transform: scale(1.5);
+  color: black;
+}
+a{
+  color: whitesmoke;
+  cursor: pointer;
+}
+a:link{
+    text-decoration:none;
+}
+a:hover {
+  color: green;
+}
+.login {
+  background-color: yellow;
+  padding: 20px;
+  display: none;
+}
