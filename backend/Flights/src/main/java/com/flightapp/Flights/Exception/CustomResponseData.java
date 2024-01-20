@@ -49,6 +49,12 @@ public class CustomResponseData {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	@Override
+	public String toString() {
+		return "CustomResponseData [application=" + application + ", TimeStamp=" + TimeStamp + ", status=" + status
+				+ ", message=" + message + "]";
+	}
 	
 	
 }

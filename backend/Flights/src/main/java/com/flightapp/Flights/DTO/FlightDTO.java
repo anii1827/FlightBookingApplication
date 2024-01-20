@@ -4,26 +4,62 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
-import com.flightapp.Flights.Model.Seats;
-import com.flightapp.Flights.Util.SeatType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 
 public class FlightDTO implements Serializable{
 	 private static final long serialVersionUID = 3810242876515034475L;
+	 
 	 private Long FlightId;
+	 
+	 @NotNull
+	 @NotBlank
 	 private String FlightNo;
+	 
+	 @NotNull
+	 @NotBlank
 	 private String Source;
+	 
+	 @NotNull
+	 @NotBlank
 	 private String Destination;
+	 
+	 @NotNull
+	 @NotBlank
 	 private String AirLine;
+	 
+	 @NotNull
 	 private int AvailableSeatInBusinessClass;
+	 
+	 @NotNull
 	 private int AvailableSeatInNonBusinessClass;
+	 
+	 @NotNull
+	 @NotBlank
 	 private String StartTime;
+	 
+	 @NotNull
+	 @NotBlank
 	 private String EndTime;
+	 
 	 private boolean Available;
-	 private String TotalTime; 
+	 
+	 private String TotalTime;
+	 
+	 
 	 private String startTimeinHoursandMinute;
+	 
 	 private String endTimeinHoursandMinute;
+	 
+	 
+	 @NotNull
 	 private double TicketPriceForBusinessClass;
+	 
+	 @NotNull
 	 private double TicketPriceForNonBusinessClass;
+	 
+	 
 	 private HashMap<String, List<Integer>> AvailableSeatNumber;
 		
 	 public FlightDTO() {

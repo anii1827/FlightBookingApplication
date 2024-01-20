@@ -4,10 +4,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,15 +25,25 @@ import com.flightapp.Flights.Services.FlightCustomerService;
 @RequestMapping("/api/v1.0/flight/customer")
 public class FlightCustomerController {
 	
-	public FlightCustomerController() {
-		System.out.println("it came here in custtommer controller");
-	}
+	private static final Logger logger = LogManager.getLogger(FlightAdminController.class);
 	
 	@Autowired
 	FlightCustomerService service;
 	
-	@GetMapping("/search/")
+	@GetMapping("/search")
 	public List<FlightDTO> search(@RequestParam("source") String source, @RequestParam("destination") String desination, @RequestParam("date") String date) {
+		if(source.isEmpty() || source.isBlank()) {
+		 	logger.error(String.format("received the null value for source"));
+		 	throw new IllegalArgumentException(String.format("source should not be null or empty"));
+		}
+		if(desination.isEmpty() || desination.isBlank()) {
+		 	logger.error(String.format("received the null value for destination"));
+		 	throw new IllegalArgumentException(String.format("destination should not be null or empty"));
+		}
+		if(date.isEmpty() || date.isBlank()) {
+			logger.error(String.format("received the null value for date"));
+		 	throw new IllegalArgumentException(String.format("date should not be null or empty"));
+		}
 		 List<FlightDTO> searchFlight = service.searchFlight(source, desination, date);
 		 System.out.println(searchFlight);
 		 return searchFlight;
@@ -45,8 +56,6 @@ public class FlightCustomerController {
 	
 	@PostMapping("")
 	public List<Integer> bookFlight(@RequestBody Set<Integer> seat, @RequestParam("flightId") long flightId, @RequestParam("businessClassSeat") int businessClassSeat, @RequestParam("NonbusinessclassSeat") int NonbusinessclassSeat) {
-		System.out.println("businessSeaat "+ businessClassSeat);
-		System.out.println("NonBusinessSeat " +NonbusinessclassSeat);
 		 return service.bookFlight(flightId, businessClassSeat, NonbusinessclassSeat, seat);
 	}
 	
@@ -64,7 +73,7 @@ public class FlightCustomerController {
 	
 	
 	@GetMapping("/get")
-	public FlightDTO getFlight(@RequestParam long flightId) {
+	public FlightDTO getFlight(@RequestParam("flightId") long flightId) {
 		return service.getFlight(flightId);
 	}
 	

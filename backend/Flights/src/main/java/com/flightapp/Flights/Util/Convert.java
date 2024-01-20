@@ -1,11 +1,5 @@
 package com.flightapp.Flights.Util;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.http.HttpStatus;
@@ -13,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import com.flightapp.Flights.DTO.FlightDTO;
 import com.flightapp.Flights.Exception.CustomException;
 import com.flightapp.Flights.Model.Flight;
-import com.flightapp.Flights.Model.Seats;
 
 public class Convert {
 

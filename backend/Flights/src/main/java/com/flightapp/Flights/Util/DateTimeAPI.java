@@ -57,31 +57,21 @@ public class DateTimeAPI {
 		catch(DateTimeException e) {
 			throw new CustomException(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
 		}
-//		catch(Exception e) {
-//			throw new CustomException(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-//		}
 	}
 	
-	//conver string to locadatetime object for aggregation
+	//convert string to locadatetime object for aggregation
 	public static LocalDateTime getDate_Time(String date) {
-		System.out.println(date);
 		try {
 		DateTimeFormatter ofPattern = DateTimeFormatter.ofPattern(getDateFormatfromAdmin, Locale.US);
 	    LocalDateTime parse = LocalDateTime.parse(date, ofPattern);
-//	    System.out.println(parse.toString());
-//	    System.out.println(DateTimeFormatter.ofPattern(getDateFormat).format(parse));
-//	    System.out.println(DateTimeFormatter.ofPattern(getTimeFormat).format(parse));
 	    return parse;
 		}
 		catch(IllegalArgumentException e) {
-			throw new CustomException(e.getMessage()+"! Date Time format should be in d-MM-yyyy HH:mm for "+date, HttpStatus.NOT_ACCEPTABLE);
+			throw new CustomException(String.format("Date format should be in %s for %s", getDate, date), HttpStatus.NOT_ACCEPTABLE);
 		}
 		catch(DateTimeParseException e) {
-			throw new CustomException(e.getMessage()+"! Date Time format should be in d-MM-yyyy HH:mm for "+date, HttpStatus.NOT_ACCEPTABLE);
+			throw new CustomException(String.format("Date format should be in %s for %s", getDate, date), HttpStatus.NOT_ACCEPTABLE);
 		}
-//		catch(Exception e) {
-//			throw new CustomException(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-//		}
 		
 	}
 	
@@ -102,9 +92,6 @@ public class DateTimeAPI {
 		catch(DateTimeException e) {
 			throw new CustomException(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
 		}
-//		catch(Exception e) {
-//			throw new CustomException(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-//		}
 	}
 
 
@@ -121,9 +108,6 @@ public class DateTimeAPI {
 		catch(DateTimeException e) {
 			throw new CustomException(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
 		}
-//		catch(Exception e) {
-//			throw new CustomException(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-//		}
 		
 	}
 	
@@ -134,15 +118,13 @@ public class DateTimeAPI {
 		LocalDate parse = LocalDate.parse(date, ofPattern);
 		return parse;
 		}
+		
 		catch(IllegalArgumentException e) {
-			throw new CustomException(e.getMessage()+"! Date format should be in yyyy-MM-d for "+date, HttpStatus.NOT_ACCEPTABLE);
+			throw new CustomException(String.format("Date format should be in %s for %s", getDate, date), HttpStatus.NOT_ACCEPTABLE);
 		}
 		catch(DateTimeParseException e) {
-			throw new CustomException(e.getMessage()+"! Date format should be in yyyy-MM-d for "+date, HttpStatus.NOT_ACCEPTABLE);
+			throw new CustomException(String.format("Date format should be in %s for %s", getDate, date), HttpStatus.NOT_ACCEPTABLE);
 		}
-//		catch(Exception e) {
-//			throw new CustomException(e.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-//		}
 	}
 		
 	

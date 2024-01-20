@@ -10,12 +10,16 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.flightapp.Flights.Controller.FlightAdminController;
 import com.flightapp.Flights.DTO.FlightDTO;
 import com.flightapp.Flights.Exception.CustomException;
+import com.flightapp.Flights.Exception.NoDataFoundException;
 import com.flightapp.Flights.Model.Flight;
 import com.flightapp.Flights.Model.Seats;
 import com.flightapp.Flights.Util.Convert;
@@ -26,23 +30,28 @@ import com.flightapp.Flights.repositories.FlightRepository;
 @Service
 public class FlightCustomerServiceImpl implements FlightCustomerService {
 	
+	private static final Logger logger = LogManager.getLogger(FlightAdminController.class);
+	
 	@Autowired
 	FlightRepository flightrepository;
+	
 
 	@Transactional
 	@Override
 	public List<Integer> bookFlight(long flightId, int businessSeat, int nonBusinessSeat, Set<Integer> seat){
-		System.out.println("businessSeaat "+ businessSeat);
-		System.out.println("NonBusinessSeat " +nonBusinessSeat);
 		if(businessSeat+nonBusinessSeat!=seat.size()) {
-			throw new CustomException("Seat Deatils is not Correct! ", HttpStatus.BAD_REQUEST);
+			throw new CustomException("Seat Deatils are not Correct! ", HttpStatus.BAD_REQUEST);
 		}
+		
 		Optional<Flight> optional = flightrepository.findById(flightId);
-		//if flight data not available then customer Exception exception will be throw
-		Flight flight = optional.orElseThrow(()->new CustomException("Data not Available with id! "+ flightId, HttpStatus.NOT_FOUND));
+		
+		//if flight data not available then custom Exception exception will be throw
+		Flight flight = optional.orElseThrow(()->new CustomException(String.format("No Flight available with %d! ", flightId), HttpStatus.NOT_FOUND));
+		
 		if(!flight.isAvailable()) {
 			throw new CustomException("Flight either has been cancel or full!", HttpStatus.INSUFFICIENT_STORAGE);
 		}
+		
 		Set<Seats> seats = flight.getSeats();
 		Set<Integer> resp = new HashSet<>(seat);
 		for(Seats s : seats) {
@@ -56,6 +65,7 @@ public class FlightCustomerServiceImpl implements FlightCustomerService {
 				}
 			}
 		}
+		
 		if(seat.size()>0) {
 			StringBuilder s = new StringBuilder("");
 			seat.stream().forEach((x)->{
@@ -63,12 +73,15 @@ public class FlightCustomerServiceImpl implements FlightCustomerService {
 			});
 			throw new CustomException("kindly check the "+s+ " seat and book again", HttpStatus.CONFLICT);
 		}
+		
 		flight.setAvailableSeatInBusinessClass(flight.getAvailableSeatInBusinessClass()-businessSeat);
 		flight.setAvailableSeatInNonBusinessClass(flight.getAvailableSeatInNonBusinessClass()-nonBusinessSeat);
 		if(flight.getAvailableSeatInBusinessClass()==0 && flight.getAvailableSeatInBusinessClass()==0) {
 			flight.setAvailable(false);
 		}
+		
 		flightrepository.save(flight);
+		
 		return resp.stream().sorted().collect(Collectors.toList());
 	}
 	
@@ -79,7 +92,6 @@ public class FlightCustomerServiceImpl implements FlightCustomerService {
 			throw new CustomException("Seat Information is not Correct! ", HttpStatus.BAD_REQUEST);
 		}
 		if(businessSeat+nonBusinessSeat!=seat.size()) {
-//			Handle Exception;
 			return false;
 		}
 		Optional<Flight> optional = flightrepository.findById(flightId);
@@ -112,22 +124,27 @@ public class FlightCustomerServiceImpl implements FlightCustomerService {
 	
 	@Transactional
 	@Override
-	public List<FlightDTO> searchFlight(String source, String destination, String date) {
-		LocalDate date1 = DateTimeAPI.getDate(date);
-		List<Flight> flight = flightrepository.findBySourceAndDestinationAndDate(source, destination, date1);
+	public List<FlightDTO> searchFlight(String source, String destination, String date) {	
+		LocalDate formatDate = DateTimeAPI.getDate(date);
+		List<Flight> flight = flightrepository.findBySourceAndDestinationAndDate(source, destination, formatDate);
 		if(flight.size()==0) {
-			throw new CustomException("No Flight Avaialble on date ", HttpStatus.INTERNAL_SERVER_ERROR);
+			String message = String.format("Looking flight for from %s to %s. but No Flights are Available", source, destination);
+			logger.warn(message);
+			throw new NoDataFoundException(message);
 		}
 		
  		List<FlightDTO> collect = flight.stream().filter(f->f.isAvailable() && f.getFstatus().equals(FlightStatus.UnBlocked.toString())).map((f)->{
  					FlightDTO entitytoDTO = Convert.entitytoDTO(f);
  					entitytoDTO.setAvailableSeatNumber(getSeatNumber(f));
  					return entitytoDTO;
- 				}
- 				).collect(Collectors.toList());
+ 				}).collect(Collectors.toList());
+ 		
  		if(collect.size()==0) {
- 			throw new CustomException("No Flight Avaialble on date "+date, HttpStatus.INTERNAL_SERVER_ERROR);
+ 			String message = String.format("Looking flight for %s from %s to %s. but No Flights are Available", date, source, destination);
+ 			logger.warn(message);
+ 			throw new NoDataFoundException(message);
 		}
+ 		
  		return collect;
 	}
 	
@@ -136,14 +153,20 @@ public class FlightCustomerServiceImpl implements FlightCustomerService {
 	public List<FlightDTO> getAllFlight() {
 		List<Flight> flights = (List<Flight>) flightrepository.findAll();
 		if(flights.size()==0) {
-			throw new CustomException("No Flight Avaialble", HttpStatus.ACCEPTED);
+			String message = String.format("No Flight has been sechduled yet");
+			throw new NoDataFoundException(message);
 		}
-		List<FlightDTO> collect = flights.stream().filter(f->f.isAvailable() && f.getFstatus().equals(FlightStatus.UnBlocked.toString())).map(
-					f->Convert.entitytoDTO(f)
-				).collect(Collectors.toList());
+		List<FlightDTO> collect = flights.stream().filter(f->f.isAvailable() && f.getFstatus().equals(FlightStatus.UnBlocked.toString())).map((f)->{
+			FlightDTO entitytoDTO = Convert.entitytoDTO(f);
+			entitytoDTO.setAvailableSeatNumber(getSeatNumber(f));
+			return entitytoDTO;
+		}).collect(Collectors.toList());
+		
 		if(collect.size()==0) {
-			throw new CustomException("No Flight Avaialble", HttpStatus.ACCEPTED);
+			String message = String.format("No Flight has been sechduled yet");
+			throw new NoDataFoundException(message);
 		}
+		
 		return collect;
 	}
 	
@@ -152,6 +175,7 @@ public class FlightCustomerServiceImpl implements FlightCustomerService {
 		Set<Seats> seats = new HashSet<>(flight.getSeats());
 		HashMap<String, List<Seats>> collect = (HashMap<String, List<Seats>>) seats.stream().filter(s->!s.isBooked()).collect(Collectors.groupingBy(Seats::getType));
 		HashMap<String, List<Integer>> map = new HashMap<>();
+		
 		collect.entrySet().forEach((x)->{
 				map.put(x.getKey(),x.getValue().stream().map(y->y.getSeatNumber()).sorted().collect(Collectors.toList()));
 		});
@@ -160,15 +184,11 @@ public class FlightCustomerServiceImpl implements FlightCustomerService {
 	
 	@Override
 	public FlightDTO getFlight(Long Id) {
-		try {
 		Optional<Flight> findById = flightrepository.findById(Id);
-		Flight flight = findById.orElseThrow(()->new CustomException("No Flight Avaialbe with id"+Id, HttpStatus.NOT_FOUND));
+		Flight flight = findById.orElseThrow(()->new NoDataFoundException(String.format("No Flight Avaialbe with id : %d", Id)));
 		FlightDTO flightDTO = Convert.entitytoDTO(flight);
+		flightDTO.setAvailableSeatNumber(getSeatNumber(flight));
 		return flightDTO;
-		}
-		catch(Exception e) {
-			throw new CustomException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
 	}
 }
 

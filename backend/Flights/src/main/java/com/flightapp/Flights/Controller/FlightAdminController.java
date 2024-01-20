@@ -2,8 +2,9 @@ package com.flightapp.Flights.Controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,14 +19,13 @@ import com.flightapp.Flights.Services.FlightAdminService;
 @RestController
 @RequestMapping("/api/v1.0/flight/admin")
 public class FlightAdminController {
+	
 	@Autowired
 	FlightAdminService adminService;
 	
 	@PostMapping("")
-	public FlightDTO AddFlight(@RequestBody FlightDTO Fdto){
-			System.out.println(Fdto);
-			System.out.println();
-			return adminService.addFlight(Fdto);
+	public FlightDTO AddFlight(@Valid @RequestBody FlightDTO flightDTO){
+			return adminService.addFlight(flightDTO);
 	}
 	
 //extra feature in case required.
